@@ -13,7 +13,7 @@ namespace FarmMarm
             
             Raylib.InitWindow(screenWidth, screenHeight, screenTitle);
             Raylib.SetTargetFPS(screenFps);
-            Console.WriteLine("Window Initialized!");
+            DebugLog("Window Initialized!");
 
             while (!Raylib.WindowShouldClose())
             {
@@ -59,15 +59,45 @@ namespace FarmMarm
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    ExeptionLog(e);
+                    ErrorLog(e.Message);
                     throw;
                 }
                 
+            }
+            
+            static void DebugLog(string debugMessage)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("Debug: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(debugMessage);
+            }
+            
+            static void ErrorLog(string errorMessage)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(errorMessage);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(":End Exception");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            
+            static void ExeptionLog(Exception exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Exception: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(exception);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(":End Exception");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
     }
 }
 
 // TODO: Add gitignore
-// TODO: Add log functions
 // TODO: Add readme

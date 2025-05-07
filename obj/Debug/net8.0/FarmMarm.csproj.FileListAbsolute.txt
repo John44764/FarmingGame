@@ -20,3 +20,4 @@ C:\Users\johno\RiderProjects\FarmMarmSolution\bin\Debug\net8.0\runtimes\osx-x64\
 C:\Users\johno\RiderProjects\FarmMarmSolution\bin\Debug\net8.0\runtimes\win-x64\native\raylib.dll
 C:\Users\johno\RiderProjects\FarmMarmSolution\bin\Debug\net8.0\runtimes\win-x86\native\raylib.dll
 C:\Users\johno\RiderProjects\FarmMarmSolution\obj\Debug\net8.0\FarmMarm.csproj.Up2Date
+C:\Users\johno\RiderProjects\FarmMarmSolution\obj\Debug\net8.0\FarmMarm.sourcelink.json
