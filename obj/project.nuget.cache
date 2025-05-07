@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "7s1dCKVzw9k=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\johno\\RiderProjects\\FarmMarmSolution\\FarmMarm.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\johno\\.nuget\\packages\\raylib-cs\\7.0.1\\raylib-cs.7.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
