@@ -1,5 +1,6 @@
 ﻿using Raylib_cs;
 using LoggingClass;
+using TileCLass;
 
 namespace FarmMarm
 {
@@ -7,64 +8,84 @@ namespace FarmMarm
     {
         static void Main(string[] args)
         {
-            string screenTitle = "FarmMarm";
+            string title = "FarmMarm"; 
             int screenWidth = 1000;
             int screenHeight = 1000;
             int screenFps = 60;
+            int tileNumber = 8;
             
-            Raylib.InitWindow(screenWidth, screenHeight, screenTitle);
-            Raylib.SetTargetFPS(screenFps);
-            Log.Debug("Window Initialized!");
+            InitWindow(screenWidth, screenHeight, screenFps, title);
 
+            Tile[,] tiles = new Tile[tileNumber, tileNumber];
+
+            int tileWidth = screenWidth / tileNumber;
+            int tileHeight = screenHeight / tileNumber;
+            int tilePositionX = 0;
+            int tilePositionY = 0;
+            
+            for (int i = 0; i < tileNumber; i++)
+            {
+                for (int j = 0; j < tileNumber; j++)
+                {
+                    tiles[i, j] = new Tile(tileWidth, tileHeight, tilePositionX, tilePositionY);
+                    tilePositionX += tileWidth;
+                }
+                tilePositionX = 0;
+                tilePositionY += tileHeight;
+            }
+            
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.Black);
-                
-                DrawGrid(25, screenWidth, screenHeight);
+
+                if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+                {
+                    int mouseX = Raylib.GetMouseX();
+                    int mouseY = Raylib.GetMouseY();
+                    
+                    for (int i = 0; i < tileNumber; i++)
+                    {
+                        for (int j = 0; j < tileNumber; j++)
+                        {
+                            if (mouseX >= tiles[i, j].PositionX && mouseX < tiles[i, j].PositionX + tiles[i, j].Width && mouseY >= tiles[i, j].PositionY && mouseY < tiles[i, j].PositionY + tiles[i, j].Height)
+                            {
+                                if (!tiles[i, j].IsClicked)
+                                {
+                                    tiles[i, j].Color = Color.Red;
+                                    tiles[i, j].IsClicked = true;
+                                }
+                                else
+                                {
+                                    tiles[i, j].Color = Color.Green;
+                                    tiles[i, j].IsClicked = false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                DrawTiles(tiles);
                 
                 Raylib.EndDrawing();
             }
 
-            static void DrawGrid(double numberOfCells, int screenWidth, int screenHeight)
+            void InitWindow(int screenWidth, int screenHeight, int screenFps, string screenTitle)
             {
-                try
+                Raylib.InitWindow(screenWidth, screenHeight, screenTitle);
+                Raylib.SetTargetFPS(screenFps);
+                Log.Debug("Window Initialized!");
+            }
+            
+            void DrawTiles(Tile[,] tiles)
+            {
+                for (int i = 0; i < tileNumber; i++)
                 {
-                    if (Math.Sqrt(numberOfCells) % 1 != 0 || numberOfCells < 0)
+                    for (int j = 0; j < tileNumber; j++)
                     {
-                        throw new System.Exception("Invalid number of cells");
-                    }
-                    int cellsSqrt = (int)Math.Sqrt(numberOfCells);
-
-                    int numberOfCellsX, numberOfCellsY;
-                    numberOfCellsX = numberOfCellsY = cellsSqrt;
-                    
-                    int cellWidth = screenWidth / numberOfCellsX;
-                    int cellHeight = screenHeight / numberOfCellsY;
-                
-                    int rectPosX = 0;
-                    int rectPosY = 0;
-                    
-                    for (int i = 0; i < cellsSqrt; i++)
-                    {
-                        for (int j = 0; j < cellsSqrt; j++)
-                        {
-                            Raylib.DrawRectangle(rectPosX, rectPosY, cellWidth, cellHeight, Color.Green);
-                            Raylib.DrawRectangleLines(rectPosX, rectPosY, cellWidth, cellHeight, Color.White);
-                            
-                            rectPosX += cellWidth;
-                        }
-                        rectPosY += cellHeight;
-                        rectPosX = 0;
+                        tiles[i, j].Draw();
                     }
                 }
-                catch (Exception e)
-                {
-                    Log.Exeption(e);
-                    Log.Error(e.Message);
-                    throw;
-                }
-                
             }
         }
     }

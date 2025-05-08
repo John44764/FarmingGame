@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FarmMarm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a50a2ed86b234e96b9055e349c1c225271f41d0e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba604ad8e73c37e11f68750f56e970361e0c7cf0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FarmMarm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FarmMarm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
